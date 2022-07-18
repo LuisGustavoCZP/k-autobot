@@ -1,25 +1,39 @@
 const { createDriver, until, By } = require('./webdriver');
 const { Talk } = require('./talks');
+const { timers } = require('./config');
 
-(async function example() {
+//const t = translate("Olá $user", {user:"Luis Gustavo"});
+//console.log(t);
+
+const start = (async function example() {
   
   const driver = await createDriver();
+  
   try {
+    const talk = new Talk(driver);
+
+    const talk0 = "Teste de BOT";
     const talk1 = "BrasilPk";
     const talk2 = "AlphaDMKenzie";
+  
+    await talk.enter(talk0);
+    console.log('Iniciando');
     
-    const talk = new Talk(driver);
-    await talk.enter(talk2);
-    const msgs = await talk.read();
-    await talk.send("Repetindo ultima mensagem \n" + msgs[msgs.length-1].msg);
-    //await talk.send("Meu criador só me permite mandar msg sem utilidade alguma");
+    
+    await talk.send("E ai galera! O bot ta on!!!");
+    console.log('Mandou oi');
 
-    /* await driver.wait(until.elementLocated(
-    {
-        xpath: "//div[contains(@class,'tchurulipa')]"
-    })); */
-    //
+    await talk.waitCommands();
+
+    await talk.send("Beleza, to saindo!");
+    await driver.sleep(timers.exitingWait);
+
+  } catch (e) {
+    console.log(e);
   } finally {
+    
     await driver.quit();
   }
-})();
+});
+
+start();

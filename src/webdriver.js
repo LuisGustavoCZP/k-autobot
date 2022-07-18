@@ -1,4 +1,4 @@
-const {Builder, Browser, By, Key, until} = require('selenium-webdriver');
+const {Builder, Browser, By, Key, until, WebDriver, WebElement, WebElementPromise, WebElementCondition} = require('selenium-webdriver');
 
 async function createDriver ()
 {
@@ -9,4 +9,4 @@ async function createDriver ()
     return driver;
 }
 
-module.exports = {createDriver, By, Key, until};
+module.exports = {createDriver, By, Key, until, WebDriver, WebElement, WebElementPromise, WebElementCondition};

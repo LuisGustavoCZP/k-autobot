@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/LuisGustavoCZP/kenzie-autobot#readme",
   "dependencies": {
+    "@unicode/unicode-13.0.0": "^1.2.2",
+    "fs": "^0.0.1-security",
     "selenium-webdriver": "^4.1.2"
   }
 }

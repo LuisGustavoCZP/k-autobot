@@ -1,0 +1,8 @@
+{
+    "exit":"\\\/.*sair.*",
+    "messages":[
+        {"text": "\\\/help", "response":"As instruções pra me usar são:$commands"},
+        {"text": "\\\/.*(olá|ola|oi).*", "response":"Olá $username"},
+        {"text": "\\\/.*(tarefa).*(pra mim).*", "response":"Não sou seu escravo, $username"}
+    ]
+}
