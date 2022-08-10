@@ -1,0 +1,8 @@
+{
+    "enteringWait":2000,
+    "configuringWait": 2000,
+    "digitationWait":50,
+    "finishingWait":100,
+    "messageWait":1000,
+    "exitingWait":1000
+}

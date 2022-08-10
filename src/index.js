@@ -1,39 +1,82 @@
-const { createDriver, until, By } = require('./webdriver');
-const { Talk } = require('./talks');
-const { timers } = require('./config');
+const express = require("express");
+const Superflix = require("./superflix");
 
-//const t = translate("Olá $user", {user:"Luis Gustavo"});
-//console.log(t);
+const app = express();
 
-const start = (async function example() {
-  
-  const driver = await createDriver();
-  
-  try {
-    const talk = new Talk(driver);
+const persistence = {
+    searchs: {},
+    selections: {},
+};
 
-    const talk0 = "Teste de BOT";
-    const talk1 = "BrasilPk";
-    const talk2 = "AlphaDMKenzie";
-  
-    await talk.enter(talk0);
-    console.log('Iniciando');
-    
-    
-    await talk.send("E ai galera! O bot ta on!!!");
-    console.log('Mandou oi');
+function getPersistent (type, name, forced, res)
+{
+    const p = persistence[type][name];
+    if(!forced && p) 
+    {
+        res.json(p);
+        return true;
+    }
+    return false;
+}
 
-    await talk.waitCommands();
+function setPersistent (type, name, data)
+{
+    const p = persistence[type];
+    p[name] = data;
+    const keys = Object.keys(p);
+    while(keys.length > 20)
+    {
+        delete p[keys[0]];
+    }
+}
 
-    await talk.send("Beleza, to saindo!");
-    await driver.sleep(timers.exitingWait);
+app.get("/search", async (req, res) => 
+{
+    const { title, f } = req.query;
 
-  } catch (e) {
-    console.log(e);
-  } finally {
-    
-    await driver.quit();
-  }
+    if(getPersistent("searchs", title, f, res)) return;
+
+    const superflix = new Superflix();
+    await superflix.start();
+
+    let results;
+    const sTitle = title.replace(/_/gi, " ").trim(); 
+
+    if(sTitle) results = await superflix.search(sTitle);
+    await superflix.quit();
+
+    setPersistent("searchs", title, results);
+
+    res.json(results);
 });
 
-start();
+app.get("/select", async (req, res) => 
+{
+    const { url, f } = req.query;
+
+    if(getPersistent("selections", url, f, res)) return;
+
+    const superflix = new Superflix();
+    await superflix.start();
+
+    let result;
+    const completeUrl = url;//`https://seriesflixtv3.vip/${url}`; 
+
+    if(completeUrl) result = await superflix.select(completeUrl);
+    await superflix.quit();
+
+    setPersistent("selections", url, result);
+
+    res.json(result);
+});
+
+app.get("/watch", async (req, res) => 
+{
+    const { url, f } = req.query;
+    
+
+});
+
+app.use(express.static(__dirname + '/public'));
+
+app.listen(80, ()=>{console.log("Servidor iniciado! http://localhost")})

@@ -1,0 +1,161 @@
+:root {
+    --white: white;
+    --light-grey: rgb(233, 233, 233);
+    --shadow-black: black;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    
+    background-color: var(--light-grey);
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 115px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 1px 1px 4px var(--shadow-black);
+    flex-wrap: wrap;
+    background-color: var(--white);
+}
+
+h1 {
+    display: flex;
+    width: fit-content;
+    margin: 5px;
+    padding: 0px;
+}
+
+header input {
+    background-color: var(--light-grey);
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px 30px;
+}
+
+.search-results {
+    display: flex;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    
+}
+
+.search-results > li {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    /* height: 100%; */
+    margin: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.search-results > li > img {
+    display: flex;
+    height: 160px;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+view-serie {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    margin: 16px;
+}
+
+view-header {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    justify-content: center;
+    margin: 8px;
+}
+
+view-header > img {
+    height: 240px;
+}
+
+view-header > div {
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    margin: 8px;
+}
+
+view-header > div > h3 > * {
+    margin-right: .8em;
+}
+
+.genders {
+    display: flex;
+    flex-direction: row;
+}
+
+.genders > li {
+    margin-right: .8em;
+}
+
+.seasons {
+    display: flex;
+    flex-direction: column;
+}
+
+.seasons > li {
+    background-color: rgb(215, 222, 223);
+}
+
+.seasons > li > h3 {
+    background-color: lightblue;
+    margin: 0;
+    padding: .4em;
+}
+
+.episodes {
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    overflow-x: auto;
+    flex-grow: 1;
+    margin: .8em;
+}
+
+.episodes > li {
+    display: flex;
+    flex-direction: column;
+    margin: .8em;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(247, 247, 247);
+    padding: 8px;
+}
+
+.episodes > li > h4 {
+    margin: .8em;
+}
+
+.episodes > li > img {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 1;
+    width: 120px;
+    object-fit: contain;
+}
