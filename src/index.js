@@ -79,4 +79,4 @@ app.get("/watch", async (req, res) =>
 
 app.use(express.static(__dirname + '/public'));
 
-app.listen(80, ()=>{console.log("Servidor iniciado! http://localhost")})
+app.listen(8000, ()=>{console.log("Servidor iniciado! http://localhost")})
