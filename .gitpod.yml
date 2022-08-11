@@ -6,4 +6,7 @@ tasks:
   - init: npm install
     command: npm run start
 
-
+ports:
+  - port: 8000
+    visibility: public
+    onOpen: open-browser
